@@ -46,6 +46,12 @@ export default defineConfig({
 						},
 						{
 							label: 'Admin CLI', link: '/server/admin'
+						},
+						{
+							label: 'Tips for your music library', link: '/server/music-library'
+						},
+						{
+							label: 'List of supported tags', link: '/server/supported-tags'
 						}
 					]
 				},

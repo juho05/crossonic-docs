@@ -34,7 +34,7 @@ sudo docker compose up -d crossonic
 | `DB_NAME` | The name of the postgres database. | `crossonic` |
 | `DB_HOST` | The host where postgres is reachable. | `localhost` |
 | `DB_PORT` | The port where postgres is reachable. | `5432` |
-| `ENCRYPTION_KEY` | A secure random key to encrypt secrets in the database. Must be a base64 encoded string representing exactly 32 bytes. Generate with `docker run --rm -it --entrypoint crossonic-admin ghcr.io/juho05/crossonic-server gen-encryption-key` | `gLZQ4A1oqi+pPHfk7Q9A6mCpOGBKR2ZcVq94tHW0lKo` |
+| `ENCRYPTION_KEY` | A secure random key to encrypt secrets in the database. Must be a base64 encoded string representing exactly 32 bytes. Generate with `docker run --rm -it --entrypoint crossonic-admin ghcr.io/juho05/crossonic-server gen-encryption-key` | *base64 string* |
 
 #### Required outside of Docker
 

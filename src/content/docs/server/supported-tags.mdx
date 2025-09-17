@@ -1,0 +1,41 @@
+---
+title: List of supported tags
+---
+
+Tags are parsed using [TagLib v2](https://taglib.org/). Tag names in the below table are as they are returned by TagLib.
+
+If alternate tags exist for a given value the first tag in the list that exists is used and all other alternatives are ignored.
+
+| Tag | Alternatives | Description |
+| --- | --- | --- |
+| `crossonic_id_*` | - | The crossonic song ID for the given instance. Written automatically by crossonic-server. Can be removed using the [admin CLI](/server/admin#remove-crossonic_id-tags). |
+| `title` | - | The name of the song. |
+| `musicbrainz_trackid` | - | The MusicBrainz ID of the song. |
+| `lyrics` | `unsyncedlyrics` | The lyrics of the song. |
+| `compilation` | - | Whether the album is a compilation. |
+| `album` | - | The name of the album of the song. |
+| `musicbrainz_releasegroupid` | - | The MusicBrainz ID of the album. |
+| `musicbrainz_albumid` | - | The MusicBrainz ID of the specific release of the album. |
+| `artists` | `artist` | The name of an artist of the song. *Multiple tags supported. Order is preserved.* |
+| `albumartists` | `album_artists`, `albumartist`, `album_artist` | The name of an artist of the album. *Multiple tags supported. Order is preserved.* |
+| `musicbrainz_artistids` | `musicbrainz_artistid` | The MusicBrainz ID of an artist of the song. *Multiple tags supported. Order should match artist tags.* |
+| `musicbrainz_albumartistids` | `musicbrainz_albumartistid` | The MusicBrainz ID of an artist of the album. *Multiple tags supported. Order should match albumartist tags.* |
+| `originalyear` | `year`, `originaldate`, `date` | Used to extract the album year. |
+| `genres` | `genre` | A genre of the song. *Multiple tags supported.* |
+| `tracknumber` | - | The track number of the song on the album. |
+| `discnumber` | - | The number of the disc the song is on. |
+| `discsubtitle` | - | The name of the disc the song is on. *Requires `discnumber`.* |
+| `releasetypes` | `releasetype` | A release type of the album, e.g. `album`, `single`, `ep`, `live`, …. *Multiple tags supported.* |
+| `bpm` | - | The BPM of the song. |
+| `replaygain_track_gain` | - | ReplayGain: the gain of the song. |
+| `replaygain_track_peak` | - | ReplayGain: the peak of the song. |
+| `replaygain_album_gain` | - | ReplayGain: the gain of the album. |
+| `replaygain_album_peak` | - | ReplayGain: the peak of the album. |
+| `labels` | `label` | A record label of the album. *Multiple tags supported.* |
+
+Additionally the following properties are extracted from the file:
+- Length of the song
+- Bit rate of the file
+- Sample rate of the file
+- Channel count of the file
+- Cover art

@@ -1,0 +1,64 @@
+---
+title: Tips for your music library
+---
+
+Although crossonic-server is designed to work with differently organized media directories I recommend following some basic strategies
+to improve your experience.
+
+## Directory structure
+
+The directory structure of you media library is mostly irrelevant for crossonic-server. It's only important for cover images to be associated
+with the correct album/artist.
+
+I recommend only storing songs from the same album in one directory as well as taking note of the cover art detection described in [Cover art](#cover-art).
+
+## Tagging your music
+
+Because crossonic-server operates on tags and not directory structure it's important to tag your files properly for best results.
+
+### Important tags
+
+Tags are text values in the metadata of your music files that tell crossonic-server (and other music software) information about the music they contain.
+
+These are the most important tags that are *required* if you want your music to be properly organized:
+
+| Name | Description |
+| --- | --- |
+| `TITLE` | The name of the song. |
+| `ALBUM` | The name of the album. |
+| `ARTIST` | The name of the artist. Create multiple `ARTIST` tags if the song has multiple artists. |
+
+See [here](/server/supported-tags) for a full list of supported tags.
+
+### Automated tagging
+
+I recommend using tools like [MusicBrainz Picard](https://picard.musicbrainz.org/) to automatically and properly tag your media files.
+
+It automatically tags your music with MusicBrainz IDs, multiple artists, release types, genres, release date, bpm and much more.
+
+### Replay gain
+
+Different media files can have vastly different volume levels. Crossonic-Server supports [ReplayGain](https://en.wikipedia.org/wiki/ReplayGain) tags
+to tell clients how loud a song should be played back in order for all songs/albums to be equally loud.
+
+These values are not calculated automatically. You'll need to use third-party tools (e.g. [rsgain](https://github.com/complexlogic/rsgain)) to calculate
+the replay gain values and write the appropriate tags into your media files.
+
+### Lyrics
+
+Crossonic-Server currently only reads unsynced lyrics from the `LYRICS` or `UNSYNCEDLYRICS` tag and does not support sidecar files.
+
+To automatically populate these tags you can use tools like [MediaHuman Lyrics Finder](https://www.mediahuman.com/lyrics-finder/).
+
+## Cover art
+
+**Album covers** are detected if they are *in the same directory* as at least one song of the album and are named `front.<ext>`, `folder.<ext>` or `cover.<ext>` (case-insensitive)
+where `<ext>` is an appropriate extension for either JPEGs or PNGs. The first file in this list being found is used as the album cover.
+
+If no such cover file is found the cover is extracted from the media file if available.
+
+**Artist images** are detected if they are named `artist.<ext>` (case-insensitive) where `<ext>` is an appropriate extension for either JPEGs or PNGs.
+If one such file is found all artists whose name matches the parent directory name EXACTLY (case-sensitive including all special characters etc.) are given
+this image as their artist image.
+
+Of no artist image file is available for a given artist their image is fetched automatically from last.fm if [last.fm integration](/server/configuration/lastfm) is configured.

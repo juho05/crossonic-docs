@@ -75,6 +75,11 @@ Key: CSBkvrsKCm/InAf5aozmjSs/9o8xDbpbmUsZ92eAO3g
 you would change `ENCRYPTION_KEY: <key>` to\
 `ENCRYPTION_KEY: "CSBkvrsKCm/InAf5aozmjSs/9o8xDbpbmUsZ92eAO3g"`.
 
+:::caution
+Crossonic-Server stores the IDs of all scanned songs as tags in the metadata of your music files.
+This feature can currently not be disabled. You can remove these tags automatically with the [admin CLI](/server/admin#remove-crossonic_id-tags).
+:::
+
 Now you should be able to start the container:
 ```bash
 sudo docker compose up -d
