@@ -1,10 +1,38 @@
 ---
 title: "Crossonic Server"
-template: splash
-hero:
-  tagline: An OpenSubsonic compatible media server.
-  actions:
-    - text: Get started
-      link: /app/get-started
-      icon: right-arrow
 ---
+
+Crossonic-Server is a Subsonic-compatible music server with the aim to support modern features of the [OpenSubsonic API](https://opensubsonic.netlify.app/) and custom extensions
+for use with the [Crossonic client application](/app).
+
+It works by scanning a directory containing your music files and making your music library available to [clients](/server/clients), that can be used to browse
+and stream your music on all your devices similar to popular streaming services.
+
+Notable features include:
+- robust library scanning
+  - takes MusicBrainz IDs into account
+  - stores crossonic song ID in the file metadata to prevent losing favorites/scrobbles when renaming files and/or changing metadata
+  - multiple artists/genres per song
+  - release groups, labels, disc subtitles, replay gain, lyrics, bpm, …
+  - incremental scanning (only scans files that have changed)
+- multi-user
+  - each with their own playlists, scrobbles, favorites, …
+  - add internet radio stations per user
+- ListenBrainz integration
+  - scrobbling
+  - two-way favorites sync
+  - configurable for each user
+- fetch artist images and biographies from [last.fm](https://last.fm)
+- on-the-fly transcoding and caching
+  - configurable `format=` and `maxBitRate=` parameters
+  - `raw`, `mp3`, `opus`, `vorbis`
+- receive scrobbles from clients (including playback duration)
+- compatible with your favorite (Open)Subsonic clients
+
+### Useful links
+
+- [installation guide](/server/install)
+- [configuration guide](/server/configuration)
+- [clients](/server/clients)
+- [OpenSubsonic API compatibility](/server/api/opensubsonic)
+- [Crossonic extensions](/server/api/crossonic)

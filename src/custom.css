@@ -2,7 +2,7 @@
 :root {
   --sl-color-accent-low: #37162f;
   --sl-color-accent: #aa2a90;
-  --sl-color-accent-high: #ed9df7;
+  --sl-color-accent-high: #c567df;
   --sl-color-white: #ffffff;
   --sl-color-gray-1: #eceef2;
   --sl-color-gray-2: #c0c2c7;
@@ -26,4 +26,9 @@
   --sl-color-gray-6: #eceef2;
   --sl-color-gray-7: #f5f6f8;
   --sl-color-black: #ffffff;
+}
+
+th,
+td {
+  min-width: 150px;
 }

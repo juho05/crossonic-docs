@@ -1,0 +1,62 @@
+---
+title: Configuration guide
+---
+
+Crossonic-Server is configured using environment variables.
+
+To set a an option named `EXAMPLE_CONFIG_OPTION` to `42` you would add it to your `docker-compose.yml` file as follows:
+```diff lang="yaml"
+# docker-compose.yml
+services:
+  crossonic:
+    # ...
+    environment:
+      # ...
++      EXAMPLE_CONFIG_OPTION: 42
+    # ...
+```
+
+After changing the configuration you'll need to restart the container with:
+
+```bash
+sudo docker compose up -d crossonic
+```
+
+## Available options
+
+### Required
+
+| Name | Description | Examples |
+| --- | --- | --- |
+| `BASE_URL` | The URL where crossonic-server is reachable. This value is used in some API responses. | `https://music.example.com`, `http://192.168.0.200:8080` |
+| `DB_USER` | The postgres user for the database connection. | `crossonic` |
+| `DB_PASSWORD` | The password of the postgres user for the database connection. | `password1234` |
+| `DB_NAME` | The name of the postgres database. | `crossonic` |
+| `DB_HOST` | The host where postgres is reachable. | `localhost` |
+| `DB_PORT` | The port where postgres is reachable. | `5432` |
+| `ENCRYPTION_KEY` | A secure random key to encrypt secrets in the database. Must be a base64 encoded string representing exactly 32 bytes. Generate with `docker run --rm -it --entrypoint crossonic-admin ghcr.io/juho05/crossonic-server gen-encryption-key` | `gLZQ4A1oqi+pPHfk7Q9A6mCpOGBKR2ZcVq94tHW0lKo` |
+
+#### Required outside of Docker
+
+| Name | Description | Examples |
+| --- | --- | --- |
+| `MUSIC_DIR` | The directory where your music files are stored. | `/home/user/my_music` |
+| `DATA_DIR` | The directory where crossonic-server should store covers etc. | `/home/user/crossonic-server/data` |
+| `CACHE_DIR` | The directory where crossonic-server should store cached files. | `/home/user/crossonic-server/cache` |
+
+*Make sure these directories exist before starting crossonic-server.*
+
+### Optional
+
+| Name | Default | Description | Format |
+| --- | --- | --- | --- |
+| `LISTEN_ADDR` | `0.0.0.0:8080` | The address where crossonic-server should listen for connections. | `host:port` |
+| `AUTO_MIGRATE` | `true` | Whether to automatically run database migrations on startup. | `true`/`false`
+| `LOG_LEVEL` | `4` | Controls the amount of logs generated. | `0` (none), `1` (fatal), `2` (error), `3` (warning), `4` (info), `5` (trace)
+| `LOG_FILE` | *STDERR* | The file to write logs to instead of writing them to *STDERR*. | `/home/user/crossonic-server/logs.txt` |
+| `LOG_APPEND` | `false` | Append new logs to the log file of the previous session instead of truncating it. | `true`/`false` |
+| `STARTUP_SCAN` | `quick` | Controls how your music library will be automatically scanned on startup. | `disabled`, `quick`, `full` |
+| `LISTENBRAINZ_URL` | `https://api.listenbrainz.org` | Change the ListenBrainz API base URL to a different (e.g. selfhosted) value. **Please disconnect all ListenBrainz users on your server before changing this variable.** | e.g. `https://maloja.example.com/apis/listenbrainz`
+| `LASTFM_API_KEY` | *empty* | See [last.fm integration](/server/configuration/lastfm). | `x9hp2n6epyaxfnjkgh3jbgjquwwnsh25` |
+| `SCAN_HIDDEN` | `false` | Whether to scan hidden directories/files. | `true`/`false` |
+| `FRONTEND_DIR` | *empty* | See [hosting a web client](/server/configuration/frontend) | `/home/user/crossonic-server/frontend` |

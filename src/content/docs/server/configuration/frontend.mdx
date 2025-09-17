@@ -1,0 +1,57 @@
+---
+title: Hosting a web client
+---
+
+Crossonic-Server supports hosting a web client. It allows a client such as the [web version of Crossonic](/app/platforms/web) to be reachable
+on the same URL as the server.
+
+## Client support
+
+I have only tested this feature with Crossonic Web but it should work with all web based clients that only require static files to be hosted.
+
+This page only discusses setting up Crossonic Web but the instructions should be easily transferable to other clients.
+
+## Hosting Crossonic Web
+
+*Disclaimer: Crossonic Web is a limited version of [Crossonic](/app) that runs in a browser. Depending on the browser the performance can be
+quite terrible and support for different media formats and transcoded playback varies substantially between browsers.*
+
+Begin by entering the directory of you `docker-compose.yml` file and creating a directory for the client files.
+
+```bash
+cd ~/crossonic-server
+mkdir frontend
+```
+
+Next download the latest version of Crossonic Web (as a `.zip` file) [from GitHub](https://github.com/juho05/crossonic/releases).
+Rename it to `crossonic-web.zip` and place it into the current directory (next to `docker-compose.yml`).
+
+Now extract `crossonic-web.zip` into the just created `./frontend` directory:
+
+```bash
+unzip crossonic-web.zip -d ./frontend
+```
+
+The last step is to mount this directory as a Docker volume and telling crossonic-server where to look for the frontend files by adding two lines to
+your `docker-compose.yml` file:
+
+```diff lang="yaml"
+# docker-compose.yml
+services:
+  crossonic:
+    # ...
+    environment:
+      # ...
+      # make sure you do NOT put a . before the /
++      FRONTEND_DIR: "/frontend"
+    volumes:
+      # ...
++      "./frontend:/frontend:ro"
+    # ...
+```
+
+Now just restart the container and you should be able to use Crossonic Web by navigating to the URL of crossonic-server in a web browser.
+
+```bash
+sudo docker compose up -d crossonic
+```

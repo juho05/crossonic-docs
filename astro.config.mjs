@@ -15,14 +15,36 @@ export default defineConfig({
 				'./src/custom.css',
 			],
 			sidebar: [
-				{ label: 'Home', link: '/' },
 				{
 					label: 'Application',
+					collapsed: true,
 					items: []
 				},
 				{
 					label: 'Server',
-					items: []
+					collapsed: true,
+					items: [
+						{
+							label: 'Overview', link: '/server'
+						},
+						{
+							label: 'Installation', link: '/server/install'
+						},
+						{
+							label: 'Configuration',
+							items: [
+								{
+									label: 'Environment variables', link: '/server/configuration'
+								},
+								{
+									label: 'Last.fm integration', link: '/server/configuration/lastfm'
+								},
+								{
+									label: 'Hosting a web client', link: '/server/configuration/frontend'
+								}
+							]
+						}
+					]
 				},
 			]
 		}),

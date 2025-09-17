@@ -1,0 +1,115 @@
+---
+title: Installation guide
+---
+
+The recommended installation method for crossonic-server is Docker. The example commands in this guide assume you are using Linux.
+
+## Creating the Docker containers
+
+To get started create a directory for crossonic-server:
+```bash
+mkdir ~/crossonic-server
+cd ~/crossonic-server
+```
+
+Next, create a `docker-compose.yml` file in that directory with the following content:
+```yml
+# docker-compose.yml
+services:
+  crossonic:
+    image: ghcr.io/juho05/crossonic-server:latest # to pin the container to a specific version replace `latest` with e.g. `v0.0.7`
+    # automatically restart crossonic-server on reboot or failure
+    restart: unless-stopped
+    # all configuration options are provided under the `environment` key
+    environment:
+      # These connection settings for the database should not need to be changed if you are using this
+      # example configuration.
+      DB_USER: crossonic
+      DB_PASSWORD: crossonic
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: crossonic
+
+      # Base64 encoded string representing exactly 32 bytes.
+      # TODO: generate with: docker run --rm -it --entrypoint crossonic-admin ghcr.io/juho05/crossonic-server gen-encryption-key
+      ENCRYPTION_KEY: <key>
+
+      # URL where crossonic-server is reachable.
+      # The value of this field is used in some API responses.
+      BASE_URL: "https://crossonic.example.com"
+    # Map directories of your host system to directories inside the container.
+    # Do not change the path right of the :.
+    volumes:
+      - "./cache:/cache"   # cache files
+      - "./data:/data"     # cover art etc.
+      # TODO: replace the left side of the : with the path to your music directory
+      - "/path/to/your/music:/music" # your music files
+    # To change the port where crossonic-server is accessible change the LEFT number and KEEP the right number as 8080.
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+  # Postgresql database for crossonic-server
+  db:
+    image: postgres:16-trixie
+    restart: unless-stopped
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: crossonic
+      POSTGRES_USER: crossonic
+```
+
+Change `/path/to/your/music` to the directory path where your music files are stored.
+
+Make sure to set the value of the `ENCRYPTION_KEY` option to a valid value. To generate an encryption key run:
+```bash
+sudo docker run --rm -it --entrypoint crossonic-admin ghcr.io/juho05/crossonic-server gen-encryption-key
+```
+
+Assuming the output of that command is:
+```
+[...]
+Key: CSBkvrsKCm/InAf5aozmjSs/9o8xDbpbmUsZ92eAO3g
+```
+you would change `ENCRYPTION_KEY: <key>` to\
+`ENCRYPTION_KEY: "CSBkvrsKCm/InAf5aozmjSs/9o8xDbpbmUsZ92eAO3g"`.
+
+Now you should be able to start the container:
+```bash
+sudo docker compose up -d
+```
+
+If everything went well you should be able to access crossonic-server on port `8080` of your server.
+To verify everything is working correctly you can try to contact the `/rest/ping` endpoint:
+```bash
+curl "https://music.julianh.de/rest/ping?f=json"
+```
+
+A successful response should look similar to this:
+```json
+{"subsonic-response":{"status":"failed","version":"1.16.1","type":"crossonic-server","serverVersion":"dev","openSubsonic":true,"crossonic":true,"crossonicVersion":"0.3.0","error":{"code":10,"message":"missing parameter 'v'"}}}
+```
+
+In case something does not work right you can view the logs with:
+```bash
+sudo docker compose logs -f crossonic
+```
+
+## Creating a user
+
+To connect a client to the server you will need to create user credentials.
+
+While the container is running execute (replace `<name>` with your desired name):
+```bash
+docker compose exec -it crossonic crossonic-admin users create <name>
+```
+
+When prompted enter your desired password and the user will be created for you. You can now
+connect a [client app](/server/clients) to your server with these credentials.
+
+## Next steps
+
+Consider enabling [last.fm integration](/server/configuration/lastfm) to automatically fetch artist images, artist biographies and album info.
+
+See the [configuration guide](/server/configuration) for all available configuration options.
