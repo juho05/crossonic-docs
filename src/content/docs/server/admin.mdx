@@ -1,0 +1,83 @@
+---
+title: Admin CLI
+---
+
+Administrative actions are done using the `crossonic-admin` command as there is currently no admin web UI.
+
+First, ensure that you are in the directory of the `docker-compose.yml` file.
+
+There are three ways to use `crossonic-admin`:
+
+1. Enter the Docker container, then execute commands:
+```bash
+sudo docker compose exec -it crossonic sh
+crossonic-admin ...
+```
+2. As a single command:
+```bash
+sudo docker compose exec -it crossonic crossonic-admin ...
+```
+
+Both methods only work if the `crossonic` container is already running.
+
+All of the following examples assume that you have entered the Docker container as described in **1**.
+
+## User management
+
+The `users` subcommand is used to manage users.
+
+### Create a new user
+
+To create a new user with their own credentials, playlists, scrobbles, favorites, … use the `users create` command:
+
+```bash
+# replace <name> with your desired username
+crossonic-admin users create <name>
+```
+
+You will be prompted for a password.
+
+### List all users
+
+To list all existing users use the `users list` command:
+
+```bash
+crossonic-admin users list
+```
+
+### Delete a user
+
+To delete a user and all of their playlists, scrobbles, favorites, … use the `users delete` command:
+
+```bash
+# replace <name> with the name of the user you want to delete
+crossonic-admin users delete <name>
+```
+
+## Remove CROSSONIC_ID tags
+
+To remove the crossonic song ID tags from the metadata of your media files use the `remove-crossonic-metadata` subcommand.
+
+```bash
+# remove all song ID tags for the current instance from all files in your library
+crossonic-admin remove-crossonic-metadata current
+# remove all song ID tags for all crossonic-server instances from all files in your library
+crossonic-admin remove-crossonic-metadata all
+
+# remove all song ID tags for the current instance from all files in the specified directory
+crossonic-admin remove-crossonic-metadata current /path/to/media/dir
+# remove all song ID tags for all crossonic-server instances from all files in the specified directory
+crossonic-admin remove-crossonic-metadata all /path/to/media/dir
+```
+
+## Miscellaneous
+
+### Generate encryption key
+
+To generate a valid encryption key for the configuration use the `gen-encryption-key` subcommand.
+
+This command works from anywhere and does NOT require a running `crossonic` container.
+
+```bash
+sudo docker run --rm -it --entrypoint crossonic-admin ghcr.io/juho05/crossonic-server gen-encryption-key
+```

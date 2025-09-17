@@ -43,6 +43,9 @@ export default defineConfig({
 									label: 'Hosting a web client', link: '/server/configuration/frontend'
 								}
 							]
+						},
+						{
+							label: 'Admin CLI', link: '/server/admin'
 						}
 					]
 				},
