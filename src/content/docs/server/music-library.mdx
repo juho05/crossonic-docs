@@ -52,13 +52,22 @@ To automatically populate these tags you can use tools like [MediaHuman Lyrics F
 
 ## Cover art
 
-**Album covers** are detected if they are *in the same directory* as at least one song of the album and are named `front.<ext>`, `folder.<ext>` or `cover.<ext>` (case-insensitive)
-where `<ext>` is an appropriate extension for either JPEGs or PNGs. The first file in this list being found is used as the album cover.
+Images are only detected if they are in either JPEG or PNG format with an appropriate extension.
 
-If no such cover file is found the cover is extracted from the media file if available.
+**Album covers** are detected if they are *in the same directory* as at least one song of the album and if their name matches one of the patterns in the `COVER_ART_PRIORITY` config option case-insensitively (default: `cover.*`, `folder.*` or `front.*` in that order).
+The first file in this list being found is used as the album cover.
 
-**Artist images** are detected if they are named `artist.<ext>` (case-insensitive) where `<ext>` is an appropriate extension for either JPEGs or PNGs.
+If no such cover file is found the cover is extracted from the media file if available. To prioritize embedded covers over cover files change the position of the
+`embedded` special value in the `COVER_ART_PRIORITY` config option.
+
+:::caution[Important]
+Embedded cover images are only extracted from the first media file of an album that is encountered. Make sure that all of your media files of an album
+have an embedded cover to prevent missing covers.
+:::
+
+**Artist images** are detected if their name matches one of the patterns in the `ARTIST_IMAGE_PRIORITY` config option case-insensitively (default: `artist.*`).
 If one such file is found all artists whose name matches the parent directory name EXACTLY (case-sensitive including all special characters etc.) are given
 this image as their artist image.
 
 If no artist image file is available for a given artist their image is fetched automatically from last.fm if [last.fm integration](/server/configuration/lastfm) is configured.
+Last.fm images can currently not be prioritized over local images.

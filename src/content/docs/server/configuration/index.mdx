@@ -60,3 +60,5 @@ sudo docker compose up -d crossonic
 | `LASTFM_API_KEY` | *empty* | See [last.fm integration](/server/configuration/lastfm). | `x9hp2n6epyaxfnjkgh3jbgjquwwnsh25` |
 | `SCAN_HIDDEN` | `false` | Whether to scan hidden directories/files. | `true`/`false` |
 | `FRONTEND_DIR` | *empty* | See [hosting a web client](/server/configuration/frontend) | `/home/user/crossonic-server/frontend` |
+| `COVER_ART_PRIORITY` | `cover.*,folder.*,front.*,embedded` | Comma separated list of patterns for cover file names. Use the special value `embedded` to refer to cover images embedded in the media file metadata. Options are tried from left to right. | `/home/user/crossonic-server/frontend` |
+| `ARTIST_IMAGE_PRIORITY` | `artist.*` | Comma separated list of patterns for artist image file names. Options are tried from left to right. |
