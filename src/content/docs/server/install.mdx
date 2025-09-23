@@ -48,7 +48,9 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+        restart: true
   # Postgresql database for crossonic-server
   db:
     image: postgres:16-trixie
@@ -56,8 +58,17 @@ services:
     volumes:
       - ./postgres:/var/lib/postgresql/data
     environment:
+      # Do not change these values without changing the corresponding environment variables for crossonic-server
+      # and the parameters of the healthcheck test command.
       POSTGRES_PASSWORD: crossonic
       POSTGRES_USER: crossonic
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U crossonic -d crossonic"]
+      interval: 15s
+      retries: 5
+      start_period: 30s
+      start_interval: 1s
+      timeout: 10s
 ```
 
 Change `/path/to/your/music` to the directory path where your music files are stored.
