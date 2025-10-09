@@ -20,7 +20,8 @@ If alternate tags exist for a given value the first tag in the list that exists 
 | `albumartists` | `album_artists`, `albumartist`, `album_artist` | The name of an artist of the album. *Multiple tags supported. Order is preserved.* |
 | `musicbrainz_artistids` | `musicbrainz_artistid` | The MusicBrainz ID of an artist of the song. *Multiple tags supported. Order should match artist tags.* |
 | `musicbrainz_albumartistids` | `musicbrainz_albumartistid` | The MusicBrainz ID of an artist of the album. *Multiple tags supported. Order should match albumartist tags.* |
-| `originalyear` | `year`, `originaldate`, `date` | Used to extract the album year. |
+| `originaldate` | `originalyear`, `date`, `year` | Used to extract the original release date. |
+| `releasedate` | `releaseyear`, `date`, `year`, `originaldate`, `originalyear` | Used to extract the release date. |
 | `genres` | `genre` | A genre of the song. *Multiple tags supported.* |
 | `tracknumber` | - | The track number of the song on the album. |
 | `discnumber` | - | The number of the disc the song is on. |
@@ -32,6 +33,7 @@ If alternate tags exist for a given value the first tag in the list that exists 
 | `replaygain_album_gain` | - | ReplayGain: the gain of the album. |
 | `replaygain_album_peak` | - | ReplayGain: the peak of the album. |
 | `labels` | `label` | A record label of the album. *Multiple tags supported.* |
+| `albumversion` | `version` | The release version (e.g. `Deluxe`, `Remastered 2006`, …) |
 
 Additionally the following properties are extracted from the file:
 - Length of the song
