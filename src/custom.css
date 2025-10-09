@@ -36,3 +36,37 @@ td {
 td > code {
   overflow-wrap: normal;
 }
+
+.screenshot-grid > p {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.screenshot-grid > p > img {
+  max-width: 360px;
+  object-fit: contain;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+.gallery figure {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.gallery img {
+  width: 100%;
+  border-bottom: 3px solid #007bff;
+}
+
+.gallery figcaption {
+  padding: 10px;
+  text-align: center;
+}

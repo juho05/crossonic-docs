@@ -1,10 +1,69 @@
 ---
-title: "Crossonic App"
-template: splash
-hero:
-  tagline: A cross-platform OpenSubsonic compatible music player.
-  actions:
-    - text: Installation
-      link: /app/install
-      icon: right-arrow
+title: Crossonic App
 ---
+
+Crossonic is a modern and cross-platform OpenSubsonic compatible music player.
+
+[Screenshots](#screenshots)
+
+[Install](/app/install)
+
+## Features
+
+- [x] Desktop and mobile layout
+- [x] Configurable home page
+- [x] Respects light/dark theme and accent color
+- [x] System integration (*Android media API*, *MPRIS*, *SystemMediaTransportControls*, …)
+- [x] Android Auto
+  - currently only playlists
+- [x] Close to tray
+- [x] Stream original or transcoded media
+  - [x] configurable transcoding settings for WiFi and mobile
+- [x] Browse/search songs, albums, artists
+- [x] Release types (albums, EPs, singles, live, compilations, …)
+- [x] Release versions (*Deluxe*, *Remaster*, *different release years*, *etc.*)
+- [x] Favorite songs/albums/artists
+- [x] Playlists
+  - [x] download for offline listening
+    - [x] original (*uses [download](https://opensubsonic.netlify.app/docs/endpoints/download/) endpoint*)
+    - [ ] transcoded
+  - [x] Add songs/albums/artists
+  - [x] drag&drop reorder
+  - [x] change cover (*crossonic-server only*)
+- [x] Configure [ListenBrainz](https://listenbrainz.org) connection (*crossonic-server only*)
+- [x] Full [OpenSubsonic](https://opensubsonic.netlify.app/) support (*gracefully handles missing features on the server*)
+  - API Key Authentication
+  - Transcoded seek
+  - Multiple artists/genres/…
+  - etc.
+- [x] Two queue system
+  - normal queue
+    - automatically populated when listening to an album/artist/playlist
+  - priority queue
+    - for songs you want to listen now before continuing with the normal queue
+  - both can be freely modified
+- [x] Shuffle artists by song or by album
+- [x] Gapless playback
+- [x] Lyrics
+  - [x] unsynced
+  - [ ] synced
+- [x] Replay gain
+- [ ] Load/save queues
+- [ ] Internet Radio
+- [ ] Pre-cache next x songs for spotty networks
+- [ ] Jukebox
+- [ ] Remote control other devices running the app
+- [ ] End-of-year recap
+
+## Screenshots
+
+![](../../../assets/screenshots/desktop-1.png)
+![](../../../assets/screenshots/desktop-2.png)
+![](../../../assets/screenshots/mobile-1.png)
+![](../../../assets/screenshots/mobile-2.png)
+![](../../../assets/screenshots/mobile-3.png)
+
+## Useful links
+
+- [installation guide](/app/install)
+- [GitHub repository](https://github.com/juho05/crossonic-server)

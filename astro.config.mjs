@@ -18,7 +18,34 @@ export default defineConfig({
 				{
 					label: 'Application',
 					collapsed: true,
-					items: []
+					items: [
+						{
+							label: 'Overview', link: '/app'
+						},
+						{
+							label: 'Installation',
+							items: [
+								{
+									label: 'Platform overview', link: '/app/install'
+								},
+								{
+									label: 'Windows', link: '/app/install/windows'
+								},
+								{
+									label: 'macOS', link: '/app/install/macos'
+								},
+								{
+									label: 'Linux', link: '/app/install/linux'
+								},
+								{
+									label: 'Android', link: '/app/install/android'
+								},
+								{
+									label: 'Web', link: '/app/install/web'
+								},
+							]
+						}
+					]
 				},
 				{
 					label: 'Server',

@@ -1,0 +1,14 @@
+---
+const { images } = Astro.props;
+---
+
+<section class="gallery">
+  {
+    images.map((image: any) => (
+      <figure>
+        <img src={image.src} alt={image.alt} />
+        <figcaption>{image.caption}</figcaption>
+      </figure>
+    ))
+  }
+</section>

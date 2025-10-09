@@ -1,0 +1,58 @@
+---
+title: Install on Linux
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Crossonic is available as an [AppImage](https://github.com/juho05/crossonic/releases/latest).
+
+:::note
+Crossonic is also available as a `.tar.gz` archive but you'll need to take care of installing dependencies,
+integrating the app into your system and updating to a new version yourself.
+:::
+
+## Install
+
+Visit the [releases](https://github.com/juho05/crossonic/releases/latest) page, scroll down to *Assets* and download `Crossonic-x.x.x-linux-x86-64.AppImage`.
+
+Next open the file. When prompted to allow execution, allow it. On some systems it's necessary to manually make the file executable, you can do that by entering the following
+command in a terminal in the directory of the downloaded file:
+
+```bash
+chmod +x ./Crossonic-x.x.x-linux-x86-64.AppImage
+```
+
+**Make sure that you change the file name in the above command to the exact name of the file you downloaded.**
+
+When prompted to integrate the AppImage, click *Yes*.
+
+The app will now properly install itself on your system and restart.
+
+## Updating
+
+Starting with version `v0.1.0` the app is able to update itself if it was installed as an AppImage. Simply click *Install* when prompted
+that a new version is available.
+
+To manually update to a new version, download the latest AppImage, make it executable and replace the old AppImage file with the new one.
+
+## Uninstall
+
+There is currently no automated uninstaller, but the process is not difficult. Assuming you followed the install instructions to install Crossonic:
+
+<Steps>
+1. Fully exit Crossonic if it is running, either by right-clicking on the tray icon and clicking *Exit* or by opening the settings page and clicking *Exit*.
+2. Uninstall the AppImage and `.desktop` file from your system:
+
+    ```bash
+    rm ~/.local/bin/crossonic
+    rm ~/.local/share/applications/org.crossonic.app.desktop
+    ```
+
+3. Remove all app data:
+
+    ```bash
+    rm -r ~/.local/share/org.crossonic.app
+    rm -r ~/.cache/org.crossonic.app
+    ```
+
+</Steps>

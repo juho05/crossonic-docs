@@ -1,0 +1,26 @@
+---
+title: Serve on Web
+---
+
+Crossonic is available as a [ZIP of static files](https://github.com/juho05/crossonic/releases/latest).
+
+:::caution[Disclaimer]
+Crossonic Web is a limited version of [Crossonic](/app) that runs in a browser. Depending on the browser the performance can be
+quite terrible and support for different media formats and transcoded playback varies substantially between browsers.
+:::
+
+## Serve using crossonic-server
+
+The recommended approach is to [use crossonic-server to host Crossonic Web](/server/configuration/frontend). This way
+Crossonic will be available on the same address as *crossonic-server*.
+
+## Use a web server
+
+Visit the [releases](https://github.com/juho05/crossonic/releases/latest) page, scroll down to *Assets* and download `Crossonic-x.x.x-web.zip`.
+Then unzip the file and host the directory with a web server of your choice (e.g. [nginx](https://nginx.org) or [caddy](https://caddyserver.com)).
+
+To prevent issues, ensure that:
+- You use TLS if you are not accessing the site via `localhost`
+- `/sqlite3.wasm` is served with `Content-Type: application/wasm`
+- `Cross-Origin-Opener-Policy` is set to `same-origin`
+- `Cross-Origin-Embedder-Policy` is set to `require-corp` or `credentialless`
