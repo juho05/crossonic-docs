@@ -44,6 +44,14 @@ export default defineConfig({
 									label: 'Web', link: '/app/install/web'
 								},
 							]
+						},
+						{
+							label: 'Guides',
+							items: [
+								{
+									label: 'How to share logs', link: '/app/guides/share-logs'
+								}
+							]
 						}
 					]
 				},
