@@ -1,0 +1,84 @@
+---
+title: Backups
+---
+
+:::caution
+This guide assumes you installed crossonic-server according to the [install guide](/server/install). If you've made any changed,
+you'll need to adapt the instructions below.
+:::
+
+:::danger
+This guide does not cover backing up your music directory. You'll of course also need to create a backup your music directory.
+This guide only discussed backing up *crossonic-server specific data*.
+:::
+
+## Create a backup
+
+There are two compontents that need to be backed up:
+
+1. [The postgresql database](#database-backup)
+2. [The data directory](#data-directory-backup)
+
+:::caution
+To ensure a healthy backup ensure that no scan is in progress when creating the backup.
+:::
+
+:::danger
+The backup methods below create archive files of the data that needs to be backed up. You are responsible for properly saving
+these files with a backup tool of your choice.
+:::
+
+To get started enter the directory where your `docker-compose.yml` file is stored:
+```bash
+cd ~/crossonic-server
+```
+
+And make sure that the `db` container is running (the `crossonic-server` can run aswell):
+```bash
+sudo docker compose up -d db
+```
+
+### Database backup
+
+To backup the database create a database dump:
+
+```bash
+sudo docker compose exec db pg_dumpall --clean --if-exists --username=crossonic | gzip > db_backup.sql.gz
+```
+
+The database backup will be available at `./db_backup.sql.gz`.
+
+:::danger
+Make sure that you additionally save your encryption key in the `docker-compose.yml` file somewhere otherwise
+you won't be able to login after restoring the backup.
+:::
+
+### Data directory backup
+
+To backup the data directory, simply create a `.tar.gz` archive of the directory:
+
+```bash
+sudo tar -czf data_backup.tar.gz ./data
+```
+
+Your backup will be available at `./data_backup.tar.gz`
+
+## Restore a backup
+
+To restore a backup first follow the [installation guide](/server/install) but do not create any users and **make sure you
+specify the same encryption key in your config that was used when the backup was created**.
+
+Next enter the directory of your `docker-compose.yml` file and make sure that your `db_backup.sql.gz` and `data_backup.tar.gz` files are available
+in the same directory.
+
+To restore the backup execute these commands:
+```bash
+sudo docker compose down
+sudo rm -rf ./postgres ./data
+sudo docker compose pull
+sudo docker compose up -d db
+sleep 10
+gunzip --stdout ./db_backup.sql.gz | sudo docker compose exec -iT db psql --dbname=postgres --username=crossonic
+sudo tar -xzf ./data_backup.tar.gz
+sudo docker compose up -d
+```

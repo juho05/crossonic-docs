@@ -87,6 +87,9 @@ export default defineConfig({
 						},
 						{
 							label: 'List of supported tags', link: '/server/supported-tags'
+						},
+						{
+							label: 'Backups', link: '/server/backups'
 						}
 					]
 				},
