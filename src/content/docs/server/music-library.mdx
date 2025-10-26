@@ -46,9 +46,14 @@ the replay gain values and write the appropriate tags into your media files.
 
 ### Lyrics
 
-Crossonic-Server currently only reads unsynced lyrics from the `LYRICS` or `UNSYNCEDLYRICS` tag and does not support sidecar files.
+Crossonic-Server supports reading lyrics from file metadata and LRC sidecar files. First, crossonic-server tries to read lyrics from a file with the same
+name as the music file but with a `.lrc` extension. Example: when reading `/example/dir/example-song.mp3` crossonic-server would try to read lyrics from
+`/example/dir/example-song.lrc`. If that fails, crossonic server will try to extract lyrics from the `LYRICS` and `UNSYNCEDLYRICS` tags.
 
-To automatically populate these tags you can use tools like [MediaHuman Lyrics Finder](https://www.mediahuman.com/lyrics-finder/).
+There are many tools available to automatically write `.lrc` files and/or lyrics tags, e.g.:
+
+- [lrcget](https://github.com/tranxuanthang/lrcget)
+- [MediaHuman Lyrics Finder](https://www.mediahuman.com/lyrics-finder)
 
 ## Cover art
 
