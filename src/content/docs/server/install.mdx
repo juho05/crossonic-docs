@@ -99,12 +99,12 @@ sudo docker compose up -d
 If everything went well you should be able to access crossonic-server on port `8080` of your server.
 To verify everything is working correctly you can try to contact the `/rest/ping` endpoint:
 ```bash
-curl "https://music.julianh.de/rest/ping?f=json"
+curl "http://localhost:8080/rest/ping?f=json"
 ```
 
 A successful response should look similar to this:
 ```json
-{"subsonic-response":{"status":"failed","version":"1.16.1","type":"crossonic-server","serverVersion":"dev","openSubsonic":true,"crossonic":true,"crossonicVersion":"0.3.0","error":{"code":10,"message":"missing parameter 'v'"}}}
+{"subsonic-response":{"status":"failed","version":"1.16.1","type":"crossonic-server","serverVersion":"0.1.1","openSubsonic":true,"crossonic":true,"crossonicVersion":"0.3.0","error":{"code":10,"message":"missing parameter 'v'"}}}
 ```
 
 In case something does not work right you can view the logs with:
