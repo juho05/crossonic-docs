@@ -45,6 +45,26 @@ To list all existing users use the `users list` command:
 crossonic-admin users list
 ```
 
+### Change user name
+
+To change the name of a user, use the `users update name` command:
+
+```bash
+# replace <name> with the current name of the user
+crossonic-admin users update name <name>
+```
+
+The user will need to re-login to all their client apps.
+
+### Change user password
+
+To change the password of a user, use the `users update password` command:
+
+```bash
+# replace <name> with the name of the user
+crossonic-admin users update password <name>
+```
+
 ### Delete a user
 
 To delete a user and all of their playlists, scrobbles, favorites, … use the `users delete` command:
@@ -53,6 +73,8 @@ To delete a user and all of their playlists, scrobbles, favorites, … use the `
 # replace <name> with the name of the user you want to delete
 crossonic-admin users delete <name>
 ```
+
+The user will need to re-login to all their client apps.
 
 ## Remove CROSSONIC_ID tags
 
