@@ -65,6 +65,36 @@ To change the password of a user, use the `users update password` command:
 crossonic-admin users update password <name>
 ```
 
+### Create an API key
+
+To create an API key for a user, use the `users api-keys create` command:
+
+```bash
+# replace <name> with the name of the user
+crossonic-admin users api-keys create <name>
+```
+
+You'll be prompted to enter a display name, which is used to later identify this API key.
+
+### List all API keys of user
+
+To list all existing API keys of a user, use the `users api-keys list` command:
+
+```bash
+# replace <name> with the name of the user
+crossonic-admin users api-keys list <name>
+```
+
+### Delete an API key
+
+To delete an API key, use the `users api-keys delete` command:
+
+```bash
+# replace <user> with the name of the user
+# and <key_name> with the display name of the API key
+crossonic-admin users api-keys list <user> <key_name>
+```
+
 ### Delete a user
 
 To delete a user and all of their playlists, scrobbles, favorites, … use the `users delete` command:
