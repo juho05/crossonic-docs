@@ -8,32 +8,32 @@ If alternate tags exist for a given value the first tag in the list that exists 
 
 | Tag | Alternatives | Description |
 | --- | --- | --- |
-| `crossonic_id_*` | - | The crossonic song ID for the given instance. Written automatically by crossonic-server. Can be removed using the [admin CLI](/server/admin#remove-crossonic_id-tags). |
-| `title` | - | The name of the song. |
-| `musicbrainz_trackid` | - | The MusicBrainz ID of the song. |
-| `lyrics` | `unsyncedlyrics` | The lyrics of the song. |
-| `compilation` | - | Whether the album is a compilation. |
-| `album` | - | The name of the album of the song. |
-| `musicbrainz_releasegroupid` | - | The MusicBrainz ID of the album. |
-| `musicbrainz_albumid` | - | The MusicBrainz ID of the specific release of the album. |
-| `artists` | `artist` | The name of an artist of the song. *Multiple tags supported. Order is preserved.* |
-| `albumartists` | `album_artists`, `albumartist`, `album_artist` | The name of an artist of the album. *Multiple tags supported. Order is preserved.* |
-| `musicbrainz_artistids` | `musicbrainz_artistid` | The MusicBrainz ID of an artist of the song. *Multiple tags supported. Order should match artist tags.* |
-| `musicbrainz_albumartistids` | `musicbrainz_albumartistid` | The MusicBrainz ID of an artist of the album. *Multiple tags supported. Order should match albumartist tags.* |
-| `originaldate` | `originalyear`, `date`, `year` | Used to extract the original release date. |
-| `releasedate` | `releaseyear`, `date`, `year`, `originaldate`, `originalyear` | Used to extract the release date. |
-| `genres` | `genre` | A genre of the song. *Multiple tags supported.* |
-| `tracknumber` | - | The track number of the song on the album. |
-| `discnumber` | - | The number of the disc the song is on. |
-| `discsubtitle` | - | The name of the disc the song is on. *Requires `discnumber`.* |
-| `releasetypes` | `releasetype` | A release type of the album, e.g. `album`, `single`, `ep`, `live`, …. *Multiple tags supported.* |
-| `bpm` | - | The BPM of the song. |
-| `replaygain_track_gain` | - | ReplayGain: the gain of the song. |
-| `replaygain_track_peak` | - | ReplayGain: the peak of the song. |
-| `replaygain_album_gain` | - | ReplayGain: the gain of the album. |
-| `replaygain_album_peak` | - | ReplayGain: the peak of the album. |
-| `labels` | `label` | A record label of the album. *Multiple tags supported.* |
-| `albumversion` | `version` | The release version (e.g. `Deluxe`, `Remastered 2006`, …) |
+| `CROSSONIC_ID_*` | - | The crossonic song ID for the given instance. Written automatically by crossonic-server. Can be removed using the [admin CLI](/server/admin#remove-crossonic_id-tags). |
+| `TITLE` | - | The name of the song. |
+| `MUSICBRAINZ_TRACKID` | - | The MusicBrainz ID of the song. |
+| `LYRICS` | `UNSYNCEDLYRICS` | The lyrics of the song. |
+| `COMPILATION` | - | Whether the album is a compilation. |
+| `ALBUM` | - | The name of the album of the song. |
+| `MUSICBRAINZ_RELEASEGROUPID` | - | The MusicBrainz ID of the album. |
+| `MUSICBRAINZ_ALBUMID` | - | The MusicBrainz ID of the specific release of the album. |
+| `ARTISTS` | `ARTIST` | The name of an artist of the song. *Multiple tags supported. Order is preserved.* |
+| `ALBUMARTISTS` | `ALBUM_ARTISTS`, `albumartist`, `album_artist` | The name of an artist of the album. *Multiple tags supported. Order is preserved.* |
+| `MUSICBRAINZ_ARTISTIDS` | `MUSICBRAINZ_ARTISTID` | The MusicBrainz ID of an artist of the song. *Multiple tags supported. Order should match artist tags.* |
+| `MUSICBRAINZ_ALBUMARTISTIDS` | `MUSICBRAINZ_ALBUMARTISTID` | The MusicBrainz ID of an artist of the album. *Multiple tags supported. Order should match albumartist tags.* |
+| `ORIGINALDATE` | `ORIGINALYEAR`, `DATE`, `YEAR` | Used to extract the original release date. |
+| `RELEASEDATE` | `RELEASEYEAR`, `DATE`, `YEAR`, `ORIGINALDATE`, `ORIGINALYEAR` | Used to extract the release date. |
+| `GENRES` | `GENRE` | A genre of the song. *Multiple tags supported.* |
+| `TRACKNUMBER` | - | The track number of the song on the album. |
+| `DISCNUMBER` | - | The number of the disc the song is on. |
+| `DISCSUBTITLE` | - | The name of the disc the song is on. *Requires `discnumber`.* |
+| `RELEASETYPES` | `RELEASETYPE` | A release type of the album, e.g. `album`, `single`, `ep`, `live`, …. *Multiple tags supported.* |
+| `BPM` | - | The BPM of the song. |
+| `REPLAYGAIN_TRACK_GAIN` | - | ReplayGain: the gain of the song. |
+| `REPLAYGAIN_TRACK_PEAK` | - | ReplayGain: the peak of the song. |
+| `REPLAYGAIN_ALBUM_GAIN` | - | ReplayGain: the gain of the album. |
+| `REPLAYGAIN_ALBUM_PEAK` | - | ReplayGain: the peak of the album. |
+| `LABELS` | `LABEL` | A record label of the album. *Multiple tags supported.* |
+| `ALBUMVERSION` | `VERSION` | The release version (e.g. `Deluxe`, `Remastered 2006`, …) |
 
 Additionally the following properties are extracted from the file:
 - Length of the song
