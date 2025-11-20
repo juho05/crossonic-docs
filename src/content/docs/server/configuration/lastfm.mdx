@@ -5,8 +5,8 @@ title: Last.fm integration
 Crossonic-Server supports fetching artist images, artist biographies and album info from [last.fm](https://last.fm). For this to work you'll need to
 supply it with a (free of charge) last.fm API key.
 
-To get started visit [this link](https://www.last.fm/api/account/create) and either login to your last.fm account or create a new one. The you should automatically be
-redirected a page that looks like this (otherwise just click the link again):
+To get started visit [this link](https://www.last.fm/api/account/create) and either login to your last.fm account or create a new one. Then you should automatically be
+redirected to a page that looks like this (otherwise just click the link again):
 
 ![Create API account page screenshot](./images/lastfm-create-api-account.png)
 
@@ -36,4 +36,4 @@ For the configuration to take effect you'll need to restart the container:
 sudo docker compose up -d crossonic
 ```
 
-Now artist images, artist biographies and album info should be automatically fetched from last.fm when a client requests them.
+Now artist images, artist biographies and album info will be automatically fetched from last.fm when a client requests them.
