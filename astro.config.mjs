@@ -63,7 +63,15 @@ export default defineConfig({
 							label: 'Overview', link: '/server'
 						},
 						{
-							label: 'Installation', link: '/server/install'
+							label: 'Installation', 
+							items: [
+								{
+									label: 'Installation', link: '/server/installation'
+								},
+								{
+									label: 'Binary Installation', link: '/server/installation/binary'
+								}
+							]
 						},
 						{
 							label: 'Configuration',

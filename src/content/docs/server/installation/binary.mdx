@@ -1,0 +1,191 @@
+
+---
+title: Install crossonic-server binary
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Binary installation is **unsupported**, the recommended method is Docker: [crossonic-server Installation](/server/installation)
+
+## Building
+### Install Dependencies
+<Tabs syncKey='distros'>
+  <TabItem label="Debian">
+  ```sh
+  apt install golang git ca-certificates libzip-dev libtag-dev
+  ```
+  </TabItem>
+  <TabItem label="Alpine">
+  ```sh
+  # TODO
+  ```
+  </TabItem>
+  <TabItem label="Arch">
+  ```sh
+  # TODO
+  ```
+  </TabItem>
+  <TabItem label="RHEL">
+  ```sh
+  # TODO
+  ```
+  </TabItem>
+</Tabs>
+
+### Build Binaries
+Clone the repository, `cd` into it, and set the `VERSION` environment variable:
+```sh
+git clone https://github.com/juho05/crossonic-server.git
+cd crossonic-server
+VERSION=dev
+```
+
+Build `crossonic-server`:
+```sh
+go build -ldflags "-X github.com/juho05/crossonic-server.Version=$VERSION" -o crossonic-server ./cmd/server
+```
+
+Build `crossonic-admin`:
+```sh
+go build -ldflags "-X github.com/juho05/crossonic-server.Version=$VERSION" -o crossonic-admin ./cmd/admin
+```
+
+## Running
+### Install Dependencies
+
+<Tabs syncKey='distros'>
+  <TabItem label="Debian">
+  ```sh
+  apt install ffmpeg ca-certificates tzdata shared-mime-info libtag2 postgresql
+  ```
+  </TabItem>
+  <TabItem label="Alpine">
+  ```sh
+  # TODO
+  ```
+  </TabItem>
+  <TabItem label="Arch">
+  ```sh
+  # TODO
+  ```
+  </TabItem>
+  <TabItem label="RHEL">
+  ```sh
+  # TODO
+  ```
+  </TabItem>
+</Tabs>
+
+### Setup PostgreSQL
+Ensure PostgreSQL is running:
+<Tabs syncKey='distros'>
+  <TabItem label="Debian">
+  ```sh
+  systemctl enable --now postgresql
+  ```
+  </TabItem>
+  <TabItem label="Alpine">
+  ```sh
+  # TODO
+  ```
+  </TabItem>
+  <TabItem label="Arch">
+  ```sh
+  # TODO
+  ```
+  </TabItem>
+  <TabItem label="RHEL">
+  ```sh
+  # TODO
+  ```
+  </TabItem>
+</Tabs>
+
+Create a user and database for `crossonic-server` via `psql`, the following is an **example**:
+
+(`su postgres` on Debian)
+```sql
+CREATE USER crossonic WITH password 'crossonic';
+CREATE DATABASE crossonic OWNER crossonic;
+```
+And exit `psql` via `\q`.
+
+### Run `crossonic-server`
+Generate a encryption key:
+```
+./crossonic-admin gen-encryption-key
+```
+
+Create a `.env` file for `crossonic-server`, the following is an **example**:
+```ini
+BASE_URL=http://crossonic:8080
+
+DB_USER=crossonic
+DB_NAME=crossonic
+DB_PASSWORD=crossonic
+DB_HOST=localhost
+DB_PORT=5432
+AUTO_MIGRATE=true
+LOG_LEVEL=4
+
+MUSIC_DIR=/music
+DATA_DIR=/home/crossonic/data
+CACHE_DIR=/home/crossonic/cache
+
+ENCRYPTION_KEY=<your encryption key>
+```
+**See the [configuration guide](/server/configuration) for all options.**
+
+
+## Create a user
+
+To connect a client to the server you will need to create user credentials.
+
+Replace `<name>` with your desired name:
+```sh
+./crossonic-admin users create <name>
+```
+
+When prompted enter your desired password and the user will be created for you. You can now
+connect a [client app](/app) to your server with these credentials.
+
+## Service
+Example service files:
+<Tabs>
+  <TabItem label="systemd">
+  Create: `/etc/systemd/system/crossonic-server.service`
+  ```ini
+  [Unit]
+  Description=Crossonic Server
+  After=network.target
+  
+  [Service]
+  Type=simple
+  ExecStart=/home/crossonic/crossonic-server
+  WorkingDirectory=/home/crossonic
+  EnvironmentFile=/home/crossonic/.env
+  User=crossonic
+  Group=crossonic
+  Restart=on-failure
+ 
+  [Install]
+  WantedBy=multi-user.target
+  ```
+  </TabItem>
+  <TabItem label="openrc">
+  ```sh
+  # TODO
+  ```
+  </TabItem>
+</Tabs>
+
+## fail2ban
+**TODO**
+
+
+## Next steps
+
+Consider enabling [last.fm integration](/server/configuration/lastfm) to automatically fetch artist images, artist biographies and album info.
+
+See the [configuration guide](/server/configuration) for all available configuration options.
+
