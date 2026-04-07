@@ -40,7 +40,8 @@ sudo docker compose up -d crossonic
 
 | Name | Description | Examples |
 | --- | --- | --- |
-| `MUSIC_DIR` | The directory where your music files are stored. | `/home/user/my_music` |
+| `MUSIC_DIR` | The directory where your music files are stored. **Conflicts:** `MUSIC_DIR_CONFIG` | `/home/user/my_music` |
+| `MUSIC_DIR_CONFIG` | Path to the [music dir configuration](/server/configuration/multi-library) file. **Conflicts:** `MUSIC_DIR` | `./config/music_dirs.json` |
 | `DATA_DIR` | The directory where crossonic-server should store covers etc. | `/home/user/crossonic-server/data` |
 | `CACHE_DIR` | The directory where crossonic-server should store cached files. | `/home/user/crossonic-server/cache` |
 
@@ -55,7 +56,6 @@ sudo docker compose up -d crossonic
 | `LOG_LEVEL` | `4` | Controls the amount of logs generated. | `0` (none), `1` (fatal), `2` (error), `3` (warning), `4` (info), `5` (trace)
 | `LOG_FILE` | *STDERR* | The file to write logs to instead of writing them to *STDERR*. | `/home/user/crossonic-server/logs.txt` |
 | `LOG_APPEND` | `false` | Append new logs to the log file of the previous session instead of truncating it. | `true`/`false` |
-| `STARTUP_SCAN` | `quick` | Controls how your music library will be automatically scanned on startup. | `disabled`, `quick`, `full` |
 | `LISTENBRAINZ_URL` | `https://api.listenbrainz.org` | Change the ListenBrainz API base URL to a different (e.g. selfhosted) value. **Please disconnect all ListenBrainz users on your server before changing this variable.** | e.g. `https://maloja.example.com/apis/listenbrainz`
 | `LASTFM_API_KEY` | *empty* | See [last.fm integration](/server/configuration/lastfm). | `x9hp2n6epyaxfnjkgh3jbgjquwwnsh25` |
 | `SCAN_HIDDEN` | `false` | Whether to scan hidden directories/files. | `true`/`false` |

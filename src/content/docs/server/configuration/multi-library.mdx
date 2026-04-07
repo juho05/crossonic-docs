@@ -1,0 +1,91 @@
+---
+title: Multi-Library Configuration
+---
+
+Instead of supplying crossonic-server with a single music library directory you may choose to configure multiple libraries
+to better organize your music collection and/or give users access to different parts of the full collection.
+
+:::caution[Important]
+Before continuing make sure that you **REMOVE** the `MUSIC_DIR` config option from your configuration if present.
+`MUSIC_DIR` and `MUSIC_DIR_CONFIG` must not both be specified at once.
+:::
+
+To configure multi-library support you'll need to create a config directory next to your `docker‑compose.yml` file:
+```bash
+mkdir ./config
+```
+
+Next, create a `music_dirs.json` file at `./config/music_dirs.json` to configure your libraries. Example:
+```jsonc
+// ./config/music_dirs.json
+[
+  {
+    // REQUIRED: the name of the library
+    "name": "Library 1",
+
+    // REQUIRED: the path of the music directory relative to the
+    // working directory of crossonic-server or absolute. Do NOT use shorthands
+    // such as ~ or $HOME.
+    // This is the path INSIDE THE CONTAINER not on the host. I recommend mounting all
+    // libraries unser /libraries/
+    "path": "/libraries/library1",
+
+    // OPTIONAL: a list of names of the users that should have access to this library.
+    // Defaults to all users.
+    "users": ["alice", "bob"]
+  },
+  {
+    "name": "Library 2",
+    "path": "/libraries/library2",
+  }
+  // ...
+]
+```
+
+:::caution
+The order of the entries in this configuration file determines the ids of the libraries.
+Changing the order of libraries in the configuration is possible but clients that store the ids of selected music libraries
+will have the wrong libraries selected after the change.
+:::
+
+:::danger
+Removing a library or unfortunate misconfigurations will cause all songs/albums/artists within them to be removed from
+the crossonic-server database.
+
+This will lead to loss of metadata such as favorite status, ratings or their place in playlists.
+:::
+
+Finally, you'll need to give crossonic-server access to the newly created configuration file. In `docker‑compose.yml`:
+```diff lang="yaml"
+# docker-compose.yml
+services:
+  crossonic:
+    # ...
+    environment:
+      # ...
++      # Path to the music dir config file INSIDE THE CONTAINER.
++      # Do NOT change this path if you change the location of the config file on the HOST.
++      MUSIC_DIR_CONFIG: "/config/music_dirs.json"
+    # ...
+    volumes:
+      # ...
++      # Mount the config directory:
++      - ./config:/config:ro
++      # Mount your music directories, e.g.
++      - "/path/to/library1:/libraries/library1"
++      - "/path/to/library2:/libraries/library2"
+-      - "/path/to/your/music:/music" # your music files
+    # ...
+```
+
+Check one last time that all paths are correct and restart the container to apply the changes:
+```bash
+sudo docker compose up-d crossonic
+```
+
+Crossonic-Server will now begin a full-scan of your newly configured music libraries.
+
+:::tip
+You can change the content of the `music_dirs.json` file without restarting crossonic-server
+and the latest configuration will be picked up when triggering a scan.
+:::

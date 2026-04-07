@@ -42,7 +42,9 @@ services:
     volumes:
       - "./cache:/cache"   # cache files
       - "./data:/data"     # cover art etc.
-      # TODO: replace the left side of the : with the path to your music directory
+      # TODO: replace the left side of the : with the path to your music directory.
+      # Alternatively, check https://crossonic.org/server/configuration/multi-library/ for how to
+      # configure multiple libraries.
       - "/path/to/your/music:/music" # your music files
     # To change the port where crossonic-server is accessible change the LEFT number and KEEP the right number as 8080.
     ports:
@@ -71,7 +73,9 @@ services:
       timeout: 10s
 ```
 
-Change `/path/to/your/music` to the directory path where your music files are stored.
+Change `/path/to/your/music` to the directory path where your music files are stored **OR**
+visit the [multi library configuration guide](/server/configuration/multi-library)
+to configure multiple libraries.
 
 Make sure to set the value of the `ENCRYPTION_KEY` option to a valid value. To generate an encryption key run:
 ```bash

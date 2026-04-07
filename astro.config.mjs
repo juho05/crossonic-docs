@@ -72,6 +72,9 @@ export default defineConfig({
 									label: 'Environment variables', link: '/server/configuration'
 								},
 								{
+									label: 'Multi-Library support', link: '/server/configuration/multi-library'
+								},
+								{
 									label: 'Last.fm integration', link: '/server/configuration/lastfm'
 								},
 								{
