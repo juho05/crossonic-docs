@@ -80,7 +80,7 @@ services:
 
 Check one last time that all paths are correct and restart the container to apply the changes:
 ```bash
-sudo docker compose up-d crossonic
+sudo docker compose up -d crossonic
 ```
 
 Crossonic-Server will now begin a full-scan of your newly configured music libraries.
@@ -88,4 +88,6 @@ Crossonic-Server will now begin a full-scan of your newly configured music libra
 :::tip
 You can change the content of the `music_dirs.json` file without restarting crossonic-server
 and the latest configuration will be picked up when triggering a scan.
+
+Keep in mind that changing volume mappings **DOES** require restarting the container.
 :::
